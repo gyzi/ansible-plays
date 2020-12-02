@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# vars
+#BACKUP_DIR=/root/backup/db-bkup/
+#ODOO_DataDir=/var/lib/odoo/.local/share/Odoo/filestore/
+BACKUP_DIR={{path_bkup}}
+ODOO_DataDir={{path_odoo}}
+
+# delete old backups
+#find ${BACKUP_DIR}* -mtime +1 -exec rm -rf {} \;
+
+
+#Listing DB
+rm -f /tmp/listdb.txt && echo 'updated db list'
+ls ${ODOO_DataDir} > /tmp/listdb.txt
+
+
+# Filestore
+
+cd ${ODOO_DataDir}
+for file in $(</tmp/listdb.txt); do tar zcf ERP-db."$file".$(date +%F).attach.gz "$file"; done
+mv ${ODOO_DataDir}ERP-db.*.attach.gz ${BACKUP_DIR}
+
+
+# db Bkup
+cd ${BACKUP_DIR}
+for file in $(</tmp/listdb.txt); do pg_dump -p 5432 "$file" 2>/dev/null |gzip > "$file".$(date +%F).dump.gz &  done
+
+
+
+ 

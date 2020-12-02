@@ -1,0 +1,21 @@
+---
+- hosts: rac
+  connection: ssh
+
+  gather_facts: false
+  become: true
+  tasks:
+  - name:  uncompress file 
+    unarchive:
+      src: https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+      dest: /opt/wkhtmltox
+      remote_src: yes
+  - name: creating link to pdf 
+    file:
+      src: /opt/wkhtmltox/bin/wkhtmltopdf
+      dest: /usr/local/bin/wkhtmltopdf
+      state: link
+
+
+
+ 

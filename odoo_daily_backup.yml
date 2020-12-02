@@ -1,0 +1,31 @@
+---
+- hosts: salanco
+  connection: ssh
+
+  gather_facts: no
+  become: yes
+
+  vars:
+  - path_odoo: /var/lib/odoo/.local/share/Odoo/filestore/
+  - path_bkup: /root/backup/db-bkup/
+
+  tasks:
+  - name: prep dir for backup
+    shell: "sudo mkdir -p /root/backup/db-bkup"
+    
+
+  - name:  copy j2 template to remote server
+    template:
+      src: bkup.j2
+      dest: /usr/local/bin/full-dump-bkup.sh
+      mode: 0755
+  
+  - name: added to schedule action 
+    cron:
+      name: "auto salanco bkup"
+      minute: "50"
+      hour: "6,22"
+      job: "/usr/local/bin/full-dump-bkup.sh"
+
+
+ 

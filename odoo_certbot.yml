@@ -1,0 +1,31 @@
+---
+- hosts: fnc
+  connection: ssh
+
+  gather_facts: false
+  become: true
+  vars: 
+  - odoo_host: rac12.almedon.com
+  - odoo_port: 8012
+  - odoo_email: gazali@almedtech.com
+
+  tasks:
+  - name: make sure pkgs installed
+    package:
+      state: present
+      name: python-certbot-nginx 
+
+  - name: copy config with new certs 
+    template:
+      src: odoo.conf.j2
+      dest: /tmp/j2/odoo.j2.conf
+
+  - name: adding odoo
+    assemble:
+      src : /tmp/j2
+      dest : /tmp/def.conf
+
+  - name: cerbot nginx to the host name
+    command: "certbot certonly --nginx  -m {{ odoo_email }} -d {{ odoo_host }} " 
+   
+ 
