@@ -1,5 +1,5 @@
 ---
-- hosts: salanco
+- hosts: all
   connection: ssh
 
   gather_facts: no
@@ -7,7 +7,7 @@
 
   vars:
   - path_odoo: /var/lib/odoo/.local/share/Odoo/filestore/
-  - path_bkup: /root/backup/db-bkup/
+  - path_bkup: up/db-/root/backbkup/
 
   tasks:
   - name: prep dir for backup
@@ -22,7 +22,7 @@
   
   - name: added to schedule action 
     cron:
-      name: "auto salanco bkup"
+      name: "auto bkup"
       minute: "50"
       hour: "6,22"
       job: "/usr/local/bin/full-dump-bkup.sh"
