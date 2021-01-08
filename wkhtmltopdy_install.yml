@@ -1,5 +1,5 @@
 ---
-- hosts: rac
+- hosts: all
   connection: ssh
 
   gather_facts: false
