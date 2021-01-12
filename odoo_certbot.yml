@@ -1,13 +1,13 @@
 ---
-- hosts: fnc
+- hosts: all
   connection: ssh
 
   gather_facts: false
   become: true
   vars: 
-  - odoo_host: rac12.almedon.com
-  - odoo_port: 8012
-  - odoo_email: gazali@almedtech.com
+  - odoo_host: 
+  - odoo_port: 8069
+  - odoo_email: 
 
   tasks:
   - name: make sure pkgs installed
