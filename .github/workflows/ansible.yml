@@ -27,12 +27,10 @@ jobs:
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: wkhtmltopdy_install.yml
-        directory: gyzi/
+        directory: .
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [all]
           fnc-qa.almedon.com
-
- 
         options: |
           --verbose
