@@ -1,0 +1,24 @@
+---
+# tasks file for roles/fail2ban
+  - name: install fail2ban
+    package:
+      name: fail2ban
+      update_cache: yes
+      state: present
+  
+  - name: adding sshd fail2ban config 
+    template:
+      src: jail.local
+      dest: "{{ fail2ban_path }}/jail.local"
+    notify: fail2ban_run
+
+  - name: adding allowed unban hosts
+    command: " fail2ban-client set sshd unbanip {{ item }}"
+    ignore_errors: true
+    loop:
+    - salanco-erp.com
+    - manr.almedon.com
+    - almedon.com
+
+
+ 

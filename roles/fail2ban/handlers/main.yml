@@ -1,0 +1,7 @@
+---
+# handlers file for roles/fail2ban
+ - name: fail2ban_run
+   service:
+      name: fail2ban
+      state: restarted
+      enabled: yes

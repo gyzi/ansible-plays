@@ -1,15 +1,4 @@
 ---
-- hosts: all
-  connection: ssh
-
-  gather_facts: false
-  become: true
-  vars: 
-  - odoo_host: 
-  - odoo_port: 8069
-  - odoo_email: 
-
-  tasks:
   - name: make sure pkgs installed
     package:
       state: present
@@ -23,7 +12,7 @@
   - name: adding odoo
     assemble:
       src : /tmp/j2
-      dest : /tmp/def.conf
+      dest : /etc/nginx/sites-available/
 
   - name: cerbot nginx to the host name
     command: "certbot certonly --nginx  -m {{ odoo_email }} -d {{ odoo_host }} " 

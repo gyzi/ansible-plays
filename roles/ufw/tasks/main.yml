@@ -1,0 +1,31 @@
+---
+# tasks file for roles/ufw
+  - name: install ufw 
+    apt:
+      name: ufw
+      state: latest
+    when: ansible_distribution == "Debian"
+
+  - name: UFW - Deny all other incoming traffic by default
+    ufw:
+       state: enabled
+       policy: deny
+       direction: incoming
+
+  - name: set loggin on
+    ufw:
+      logging: on
+
+  - name: allow range ports 
+    ufw: 
+      port: "{{ item }}"
+      proto: tcp
+      rule: allow
+    with_items: 
+    - 80
+    - 443
+    - 8000:9000 
+  - name: service enable
+    service:
+      name: ufw
+      state: started

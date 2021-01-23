@@ -1,0 +1,4 @@
+---
+# vars file for odoo_backup.yml
+path_odoo: /var/lib/odoo/.local/share/Odoo/filestore/
+path_bkup: /root/backbkup/db-bkup/

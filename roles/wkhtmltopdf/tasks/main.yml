@@ -1,15 +1,20 @@
 ---
-- hosts: all
-  connection: ssh
-
-  gather_facts: false
-  become: true
-  tasks:
+  - name: check wkhtmlox directoy
+    file:
+      path: /opt/wkhtmltox
+      state: absent
+      mode: 0750
+    
   - name:  uncompress file 
     unarchive:
       src: https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-      dest: /opt/wkhtmltox
+      dest: /tmp/
       remote_src: yes
+  - name: copy to opt dir
+    copy:
+      src: /tmp/wkhtmltox/
+      remote_src: yes
+      dest: /opt/wkhtmltox
   - name: creating link to pdf 
     file:
       src: /opt/wkhtmltox/bin/wkhtmltopdf

@@ -1,0 +1,7 @@
+---
+- name: install essental admin tools cli
+  apt:
+     name: [ 'curl', 'vim', 'git', 'ufw']
+     state: latest
+
+        

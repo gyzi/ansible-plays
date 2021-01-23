@@ -1,0 +1,22 @@
+---
+# tasks file for roles/sudoer
+  - name: adding user to sudoer 
+    copy: 
+      dest: /etc/sudoers.d/"{{ user_name }}" 
+      content: '{{ user_name }} ALL=(ALL:ALL) NOPASSWD:ALL'
+      # validate: /usr/sbin/visudo -cF %s
+ 
+  - name: Password Authenictation comments
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: "^Password_Authentication no"
+      state: absent
+    notify: restart_sshd
+    
+  - name: add line to enable Authenictation 
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      line: "Password_Authentication yes"
+      insertafter: "^#Password_Authentication yes"
+      state: present
+    notify: restart_sshd

@@ -1,0 +1,15 @@
+---
+# tasks file for roles/rclone
+  - name: installing rclone 
+    shell: "curl https://rclone.org/install.sh | sudo bash"
+    ignore_errors: true
+    
+  - name: export env rclone 
+    shell: "export RCLONE_MEGA_USER=mega@almedtech.com && export RCLONE_MEGA_PASS={{ mega_pass }}"
+    tags: rclone
+    
+  - name: config rclone to remote mega
+    template:
+      src: rclone.conf.j2
+      dest: /root/.config/rclone/rclone.conf
+    tags: rclone

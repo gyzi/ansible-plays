@@ -1,18 +1,6 @@
 ---
-- hosts: all
-  connection: ssh
-
-  gather_facts: no
-  become: yes
-
-  vars:
-  - path_odoo: /var/lib/odoo/.local/share/Odoo/filestore/
-  - path_bkup: up/db-/root/backbkup/
-
-  tasks:
   - name: prep dir for backup
     shell: "sudo mkdir -p /root/backup/db-bkup"
-    
 
   - name:  copy j2 template to remote server
     template:

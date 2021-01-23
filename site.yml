@@ -1,0 +1,17 @@
+---
+- hosts: all
+  connection: local
+  become: true
+  vars:
+  - var_name:
+  
+  roles:
+  - {role: common, tags: common }
+  - {role: fail2ban, tags: fail2ban}
+  - {role: rclone, tags: rclone}
+  - {role: users, tags: users}
+  - {role: sudoer, tags: sudoer}
+  - {role: ufw, tags: ufw}
+  - {role: odoo_certbot, tags: odoo_certbot}
+  - {role: odoo_backup, tags: odoo_backup}
+  - {role: wkhtmltopdf, tags: wkhtmltopdf}

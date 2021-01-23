@@ -1,0 +1,6 @@
+---
+# handlers file for roles/sudoer
+  - name: restart_sshd
+    service:
+      name: sshd
+      state: restarted

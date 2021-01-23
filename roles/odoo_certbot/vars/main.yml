@@ -1,0 +1,5 @@
+---
+# vars file for roles/odoo_certbot
+odoo_host:
+odoo_port: 8069
+odoo_email:
