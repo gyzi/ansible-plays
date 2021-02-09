@@ -15,3 +15,4 @@
   - {role: odoo_certbot, tags: odoo_certbot}
   - {role: odoo_backup, tags: odoo_backup}
   - {role: wkhtmltopdf, tags: wkhtmltopdf}
+  - {role: terraform_install, tags: tf-install}
