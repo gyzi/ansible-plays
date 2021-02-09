@@ -1,2 +1,27 @@
 ---
 # tasks file for roles/terraform_install
+  - name: download and unachrive terrfom copy
+    get_url:
+      url: https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_linux_amd64.zip
+      dest: /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
+      validate_certs: no
+    
+  - name: unarchive file
+    unarchive:
+      src: /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
+      dest: /usr/local/bin/
+      remote_src: true
+      mode: 0750
+  - name: link terraform fir bin
+    file:
+      src: /usr/local/bin/terraform
+      dest: /usr/bin/terraform
+      remote_src: true
+  - name: checking if works
+    command : "/usr/local/bin/terraform -v"
+    register: terraform_ver
+
+
+  - name: show ver
+    debug: 
+      msg: " Terraform Version {{ terraform_ver }}  arch {{ ansible_architecture }} or {{ ansible_machine }}"

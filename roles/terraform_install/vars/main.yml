@@ -1,2 +1,9 @@
 ---
 # vars file for roles/terraform_install
+    tf_ver: 0.14.2
+    # tf_arch: {
+    #   "arm64" : "https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_linux_arm.zip", 
+    #   "64bit" : "https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_linux_amd64.zip"
+    #   "32bit" : "https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_linux_amd64.zip"
+    #   "win32" : "https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_windows_amd64.zip"
+    # }

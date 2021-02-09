@@ -2,8 +2,6 @@
 - hosts: all
   connection: local
   become: true
-  vars:
-  - var_name:
   
   roles:
   - {role: common, tags: common }
