@@ -5,7 +5,10 @@
       url: https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_linux_amd64.zip
       dest: /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
       validate_certs: no
-    
+  - name: make sure zip installed
+    package:
+      name: zip
+      state: present
   - name: unarchive file
     unarchive:
       src: /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
@@ -16,6 +19,7 @@
     file:
       src: /usr/local/bin/terraform
       dest: /usr/bin/terraform
+      state: link
       remote_src: true
   - name: checking if works
     command : "/usr/local/bin/terraform -v"
