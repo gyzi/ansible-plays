@@ -16,9 +16,7 @@
     command: " fail2ban-client set sshd unbanip {{ item }}"
     ignore_errors: true
     loop:
-    - salanco-erp.com
-    - manr.almedon.com
-    - almedon.com
+    - localhost
 
 
  
